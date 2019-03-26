@@ -1,9 +1,6 @@
-# namespace :scheduler do
-# end
-
 desc "This task is called by the Heroku scheduler add-on"
 task :update_feed => :environment do
-  require 'line/bot'
+  require 'line/bot'  # gem 'line-bot-api'
   require 'open-uri'
   require 'kconv'
   require 'rexml/document'
@@ -14,9 +11,9 @@ task :update_feed => :environment do
   }
 
   # 使用したxmlデータ（毎日朝6時更新）：以下URLを入力すれば見ることができます。
-  url = "https://www.drk7.jp/weather/xml/13.xml"
+  url  = "https://www.drk7.jp/weather/xml/13.xml"
   # xmlデータをパース（利用しやすいように整形）
-  xml = open(url).read.toutf8
+  xml  = open( url ).read.toutf8
   doc = REXML::Document.new(xml)
   # パスの共通部分を変数化（area[4]は「東京地方」を指定している）
   xpath = 'weatherforecast/pref/area[4]/info/rainfallchance/'
